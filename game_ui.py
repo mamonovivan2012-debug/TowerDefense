@@ -140,7 +140,7 @@ class Root(FloatLayout):
         super().__init__(**kw)
         column = BoxLayout(orientation='vertical')
 
-        self.top = Label(size_hint_y=None, height=dp(30), font_size=sp(15))
+        self.info_label = Label(size_hint_y=None, height=dp(30), font_size=sp(15))
         self.field = Field()
         self.field.hud = self.refresh
 
@@ -164,7 +164,7 @@ class Root(FloatLayout):
         for b in (self.b_up, self.b_sell, self.b_speed, self.b_wave):
             bar.add_widget(b)
 
-        column.add_widget(self.top)
+        column.add_widget(self.info_label)
         column.add_widget(self.field)
         column.add_widget(bar)
         self.add_widget(column)
@@ -194,7 +194,7 @@ class Root(FloatLayout):
             info += f"    |    {d['name']} ур.{t.level}: урон {t.dmg:.0f}, радиус {t.range:.1f}"
         elif g.build_kind:
             info += f"    |    {TOWERS[g.build_kind]['name']}: коснись свободной клетки"
-        self.top.text = info
+        self.info_label.text = info
 
         for kind, b in self.tower_buttons.items():
             can = g.gold >= TOWERS[kind]['cost']
